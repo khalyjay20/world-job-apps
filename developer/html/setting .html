@@ -1,0 +1,138 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><section class="settings">
+  <h2>⚙️ Settings</h2>
+
+  <div class="setting-box">
+    <label for="username">👤 Username</label>
+    <input type="text" id="username" placeholder="Enter Name" />
+  </div>
+
+  <div class="setting-box">
+    <label for="email">📧 Email</label>
+    <input type="email" id="email" placeholder="Username@email.com" />
+  </div>
+
+  <div class="setting-box">
+    <label for="password">🔒 Change Password</label>
+    <input type="password" id="password" placeholder="Enter new password" />
+  </div>
+
+  <div class="setting-box toggle">
+    <label for="notifications">🔔 Enable Notifications</label>
+    <input type="checkbox" id="notifications" checked />
+  </div>
+
+  <button class="save-btn">💾 Save Changes</button>
+</section><style>.settings {
+  margin-top: 40px;
+  background: #fff;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  max-width: 500px;
+}
+
+.settings h2 {
+  margin-bottom: 20px;
+  color: #0f172a;
+}
+
+.setting-box {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.setting-box label {
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #1e293b;
+}
+
+.setting-box input[type="text"],
+.setting-box input[type="email"],
+.setting-box input[type="password"] {
+  padding: 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.setting-box.toggle {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.setting-box input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+}
+
+.save-btn {
+  margin-top: 10px;
+  background-color: #38bdf8;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.save-btn:hover {
+  background-color: #0ea5e9;
+}</style><script><script>
+  const profileForm = document.getElementById('profileForm');
+  const previewPic = document.getElementById('previewPic');
+  const profilePicInput = document.getElementById('profilePic');
+
+  profilePicInput.addEventListener('change', function () {
+    const file = this.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        previewPic.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+
+  profileForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const fullName = document.getElementById('fullName').value;
+    const email = document.getElementById('email').value;
+    const phone = document.getElementById('phone').value;
+    const location = document.getElementById('location').value;
+    const imageFile = profilePicInput.files[0];
+
+    if (imageFile) {
+      // Upload image to Firebase Storage
+      const storageRef = firebase.storage().ref('profilePics/' + imageFile.name);
+      storageRef.put(imageFile).then(snapshot => {
+        snapshot.ref.getDownloadURL().then(downloadURL => {
+          saveToDatabase(fullName, email, phone, location, downloadURL);
+        });
+      });
+    } else {
+      saveToDatabase(fullName, email, phone, location, previewPic.src); // Use current image
+    }
+  });
+
+  function saveToDatabase(name, email, phone, location, imageUrl) {
+    const userId = 'user_' + Date.now(); // or use user UID if using auth
+
+    firebase.database().ref('profiles/' + userId).set({
+      name,
+      email,
+      phone,
+      location,
+      imageUrl
+    }).then(() => {
+      alert("✅ Profile saved to Firebase!");
+    }).catch(error => {
+      alert("❌ Error: " + error.message);
+    });
+  }
+</script></script>

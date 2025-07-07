@@ -1,0 +1,164 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Home | Job Application</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <h1 class="fade-in">Welcome to Job Application</h1>
+    <nav>
+      <ul>
+        <li><a href="index (2).html" class="active">Home</a></li>
+        <li><a href="application 2.html">Apply</a></li>
+        <li><a href="interview .html">Interview</a></li>
+        <li><a href="dashboard .html">Dashboard</a></li>
+        <li><a href="contact2.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero slide-in">
+    <h2>Your Future Starts Here</h2>
+    <p>Apply for your dream job and manage your career with ease.</p>
+    <a href="index3.html" class="btn">Apply Now</a>
+  </section>
+
+  <section class="features fade-in">
+    <div class="feature-box">
+      <h3>Easy Application</h3>
+      <p>Fill out your form quickly and get started today.</p>
+    </div>
+    <div class="feature-box">
+      <h3>Track Progress</h3>
+      <p>Check your interview time and status updates live.</p>
+    </div>
+    <div class="feature-box">
+      <h3>Secure Dashboard</h3>
+      <p>All your personal info is safely saved on your profile.</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 world - Job Application System</p>
+  </footer>
+</body>
+</html>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.6;
+  background: url('https://images.unsplash.com/photo-1521790363533-91bba1e5b5e1?auto=format&fit=crop&w=1950&q=80') no-repeat center center fixed;
+  background-size: cover;
+  color: #333;
+}
+
+header {
+  background: rgba(0, 51, 102, 0.9);
+  color: white;
+  padding: 20px;
+  text-align: center;
+  animation: fadeIn 2s ease-in-out;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  margin-top: 10px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 8px 16px;
+}
+
+nav a:hover,
+nav a.active {
+  background: #0055aa;
+  border-radius: 5px;
+}
+
+.hero {
+  text-align: center;
+  padding: 80px 20px;
+  background: rgba(255, 255, 255, 0.8);
+  margin: 40px;
+  border-radius: 20px;
+  animation: slideIn 1.2s ease-in-out;
+}
+
+.hero h2 {
+  font-size: 2.8em;
+  margin-bottom: 15px;
+}
+
+.hero .btn {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 26px;
+  background: #004080;
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+.hero .btn:hover {
+  background: #00264d;
+}
+
+.features {
+  display: flex;
+  justify-content: space-around;
+  padding: 40px 20px;
+  background: rgba(255, 255, 255, 0.95);
+  margin: 20px;
+  border-radius: 20px;
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+.feature-box {
+  background: #e6f2ff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  width: 30%;
+  text-align: center;
+  transition: transform 0.3s;
+}
+
+.feature-box:hover {
+  transform: translateY(-10px);
+}
+
+footer {
+  text-align: center;
+  background: rgba(0, 51, 102, 0.9);
+  color: white;
+  padding: 20px;
+  margin-top: 40px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-100px); }
+  to { opacity: 1; transform: translateX(0); }
+}</style>

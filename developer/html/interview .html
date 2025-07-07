@@ -1,0 +1,184 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Job Interview Section</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <section class="interview-section">
+    <div class="container">
+      <h2>Interview Process</h2>
+      <p>Prepare for your interview by reviewing our guide and submitting your availability.</p>
+
+      <div class="interview-steps">
+        <div class="step">
+          <h3>📄 Application Review</h3>
+          <p>We check your resume and background info.</p>
+        </div>
+        <div class="step">
+          <h3>📞 Phone Interview</h3>
+          <p>A short phone call with basic questions.</p>
+        </div>
+        <div class="step">
+          <h3>🧑‍💼 Final Interview</h3>
+          <p>Meet with the hiring team for the final discussion.</p>
+        </div>
+      </div>
+
+      <form class="interview-form">
+        <h3>Schedule Your Interview</h3>
+        <input type="text" placeholder="Full Name" required>
+        <input type="email" placeholder="Email Address" required>
+        <input type="date" required>
+        <textarea placeholder="Preferred Interview Time (e.g. 10AM - 12PM)"></textarea>
+        <button type="submit">Submit</button>
+      </form>
+
+      <a href="dashboard .html" class="home-btn">🏠 Home</a>
+    </div>
+  </section>
+</body>
+</html><style>body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #f0f8ff;
+}
+
+.interview-section {
+  padding: 40px 20px;
+  background: linear-gradient(120deg, #e0f7fa, #f8f9fa);
+  text-align: center;
+}
+
+.container {
+  max-width: 800px;
+  margin: auto;
+  background: #fff;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  color: #00796b;
+  margin-bottom: 20px;
+}
+
+.interview-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.step {
+  background: #e0f2f1;
+  padding: 20px;
+  border-left: 5px solid #00796b;
+  border-radius: 12px;
+  text-align: left;
+}
+
+.interview-form input,
+.interview-form textarea {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 1em;
+}
+
+.interview-form button {
+  margin-top: 15px;
+  padding: 12px 25px;
+  background-color: #00796b;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.interview-form button:hover {
+  background-color: #004d40;
+}
+
+.home-btn {
+  display: inline-block;
+  margin-top: 30px;
+  text-decoration: none;
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 15px;
+  transition: background 0.3s;
+}
+
+.home-btn:hover {
+  background-color: #388e3c;
+}</style><script><!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+<script>
+  // Your Firebase config here
+  const firebaseConfig = {
+    apiKey: "YOUR_API_KEY",
+    authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+    databaseURL: "https://YOUR_PROJECT_ID.firebaseio.com",
+    projectId: "YOUR_PROJECT_ID",
+    storageBucket: "YOUR_PROJECT_ID.appspot.com",
+    messagingSenderId: "SENDER_ID",
+    appId: "APP_ID"
+  };
+
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  const database = firebase.database();
+
+  // Form submission handler
+  const form = document.querySelector('.interview-form');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const name = form.querySelector('input[type="text"]').value;
+    const email = form.querySelector('input[type="email"]').value;
+    const date = form.querySelector('input[type="date"]').value;
+    const time = form.querySelector('textarea').value;
+
+    // Save to Firebase
+    const newRef = database.ref('interviews').push();
+    newRef.set({
+      name: name,
+      email: email,
+      date: date,
+      time: time,
+      status: "Submitted"
+    });
+
+    // Show success message
+    alert("✅ Interview info submitted! You'll receive confirmation shortly.");
+    form.reset();
+  });
+</script>
+<script>
+  const dbRef = firebase.database().ref('interviews');
+
+  dbRef.once('value', (snapshot) => {
+    snapshot.forEach((childSnapshot) => {
+      const data = childSnapshot.val();
+      const display = `
+        <div>
+          <h4>${data.name}</h4>
+          <p>Email: ${data.email}</p>
+          <p>Date: ${data.date}</p>
+          <p>Time: ${data.time}</p>
+        </div><hr>
+      `;
+      document.body.innerHTML += display;
+    });
+  });
+</script></script>

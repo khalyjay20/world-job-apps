@@ -1,0 +1,162 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Job Application</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<script>
+  function showLoading() {
+    document.getElementById("loading").style.display = "block";
+    return true; // allow form to submit
+  }
+</script>
+<body>
+<form action="https://formsubmit.co/khalifajafar431@gmail.com" method="POST" enctype="multipart/form-data" onsubmit="return showLoading()">
+  <input type="hidden" name="_subject" value="New Job Application">
+  <input type="hidden" name="_captcha" value="false">
+  <input type="hidden" name="_template" value="table">
+
+  <label for="name">Full Name</label>
+  <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+
+  <label for="email">Email Address</label>
+  <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+  <label for="position">Position Applying For</label>
+  <input type="text" id="position" name="position" placeholder="E.g. Web Developer" required>
+
+  <label for="resume">Upload Resume</label>
+  <input type="file" id="resume" name="resume" required>
+
+  <label for="cover">Cover Letter</label>
+  <textarea id="cover" name="cover" placeholder="Write your message here..." required></textarea>
+
+  <div id="loading" style="display:none; text-align:center; margin-top:10px; color:blue;">
+    Submitting... Please wait.
+  </div>
+
+  <button type="submit">Submit Application</button>
+</form>
+    
+
+</body>
+</html><style>body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to right, #74ebd5, #ACB6E5);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.application-container {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  width: 90%;
+  max-width: 500px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+form label {
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+form input,
+form textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+
+form textarea {
+  height: 100px;
+  resize: none;
+}
+
+button {
+  margin-top: 20px;
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+.home-btn {
+  display: block;
+  margin-top: 20px;
+  text-align: center;
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+}</style><script><script>
+  document.querySelector("form").addEventListener("submit", function(event) {
+    event.preventDefault(); // prevent real submission for now
+
+    alert("Thanks for applying! You will get a message shortly.");
+    // You can also clear the form if needed:
+    this.reset();
+  });
+</script>
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js"></script>
+
+<script>
+  const firebaseConfig = {
+    apiKey: "YOUR_API_KEY",
+    authDomain: "YOUR_PROJECT.firebaseapp.com",
+    projectId: "YOUR_PROJECT_ID",
+    storageBucket: "YOUR_PROJECT.appspot.com",
+    messagingSenderId: "YOUR_MSG_ID",
+    appId: "YOUR_APP_ID"
+  };
+
+  // Initialize Firebase
+  const app = firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+
+  // Handle form submission
+  document.querySelector("form").addEventListener("submit", async function(event) {
+    event.preventDefault();
+
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const position = document.getElementById("position").value;
+    const cover = document.getElementById("cover").value;
+
+    try {
+      await db.collection("applications").add({
+        name, email, position, cover,
+        submittedAt: new Date()
+      });
+
+      alert("Application submitted successfully!");
+      this.reset();
+    } catch (err) {
+      alert("Error saving data: " + err.message);
+    }
+  });
+</script></script>

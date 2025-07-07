@@ -1,0 +1,253 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><section id="profile" class="content-section hidden">
+  <form class="profile-form" id="profileForm">
+    <h2>👤 Edit Your Profile</h2>
+
+    <div class="profile-image-upload">
+      <label for="profilePic">Profile Picture</label>
+      <input type="file" id="profilePic" accept="image/*" />
+      <img id="previewPic" src="https://i.imgur.com/1Xg8DMP.png" alt="Profile Preview">
+    </div>
+
+    <div class="form-group">
+      <label for="fullName">Full Name</label>
+      <input type="text" id="fullName" value="Enter Name" />
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email Address</label>
+      <input type="email" id="email" value="Username@email.com" />
+    </div>
+
+    <div class="form-group">
+      <label for="phone">Phone Number</label>
+      <input type="text" id="phone" value="+234-800-123-4567" />
+    </div>
+
+    <div class="form-group">
+      <label for="location">Location</label>
+      <input type="text" id="location" value="Nigeria" />
+    </div>
+
+    <button type="submit" class="save-btn">💾 Save Profile</button>
+  </form>
+</section><style>.profile-form {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  max-width: 600px;
+  margin-top: 30px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.profile-form h2 {
+  margin-bottom: 20px;
+  color: #0f172a;
+}
+
+.profile-image-upload {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-image-upload input {
+  margin-bottom: 10px;
+}
+
+.profile-image-upload img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid #38bdf8;
+}
+
+.form-group {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.form-group input {
+  padding: 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.save-btn {
+  margin-top: 10px;
+  background-color: #38bdf8;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.save-btn:hover {
+  background-color: #0ea5e9;
+}</style><script><script>
+  const profilePicInput = document.getElementById('profilePic');
+  const previewPic = document.getElementById('previewPic');
+  const profileForm = document.getElementById('profileForm');
+
+  profilePicInput.addEventListener('change', function () {
+    const file = this.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        previewPic.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+
+  profileForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    alert("✅ Profile Saved!\n\n(Name: " + document.getElementById("fullName").value + ")");
+    // You can send this data to a backend later using fetch() or AJAX
+  });
+</script>
+<script>
+  const profilePicInput = document.getElementById('profilePic');
+  const previewPic = document.getElementById('previewPic');
+  const profileForm = document.getElementById('profileForm');
+
+  // Load saved data on page load
+  window.addEventListener('DOMContentLoaded', () => {
+    const savedData = JSON.parse(localStorage.getItem('profileData'));
+    if (savedData) {
+      document.getElementById('fullName').value = savedData.name || '';
+      document.getElementById('email').value = savedData.email || '';
+      document.getElementById('phone').value = savedData.phone || '';
+      document.getElementById('location').value = savedData.location || '';
+      if (savedData.image) {
+        previewPic.src = savedData.image;
+      }
+    }
+  });
+
+  // Preview and save image
+  profilePicInput.addEventListener('change', function () {
+    const file = this.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        previewPic.src = e.target.result;
+
+        // Save image to localStorage
+        saveProfileToStorage({ image: e.target.result });
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+
+  // On form submit
+  profileForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const profileData = {
+      name: document.getElementById('fullName').value,
+      email: document.getElementById('email').value,
+      phone: document.getElementById('phone').value,
+      location: document.getElementById('location').value,
+      image: previewPic.src
+    };
+
+    localStorage.setItem('profileData', JSON.stringify(profileData));
+    alert("✅ Profile information saved!");
+  });
+
+  // Optional helper to update one part (image only)
+  function saveProfileToStorage(newData) {
+    const existing = JSON.parse(localStorage.getItem('profileData')) || {};
+    const updated = { ...existing, ...newData };
+    localStorage.setItem('profileData', JSON.stringify(updated));
+  }
+</script>
+<!-- Firebase Core SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+<!-- Firebase Auth (optional) -->
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+<!-- Realtime Database or Firestore -->
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+<!-- Firebase Storage -->
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-storage-compat.js"></script>
+<script>
+  const firebaseConfig = {
+    apiKey: "YOUR_API_KEY",
+    authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+    databaseURL: "https://YOUR_PROJECT_ID.firebaseio.com",
+    projectId: "YOUR_PROJECT_ID",
+    storageBucket: "YOUR_PROJECT_ID.appspot.com",
+    messagingSenderId: "YOUR_SENDER_ID",
+    appId: "YOUR_APP_ID"
+  };
+
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  const database = firebase.database(); // or use firestore if you want
+  const storage = firebase.storage();
+</script>
+<script>
+  const profileForm = document.getElementById('profileForm');
+  const previewPic = document.getElementById('previewPic');
+  const profilePicInput = document.getElementById('profilePic');
+
+  profilePicInput.addEventListener('change', function () {
+    const file = this.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        previewPic.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+
+  profileForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const fullName = document.getElementById('fullName').value;
+    const email = document.getElementById('email').value;
+    const phone = document.getElementById('phone').value;
+    const location = document.getElementById('location').value;
+    const imageFile = profilePicInput.files[0];
+
+    if (imageFile) {
+      // Upload image to Firebase Storage
+      const storageRef = firebase.storage().ref('profilePics/' + imageFile.name);
+      storageRef.put(imageFile).then(snapshot => {
+        snapshot.ref.getDownloadURL().then(downloadURL => {
+          saveToDatabase(fullName, email, phone, location, downloadURL);
+        });
+      });
+    } else {
+      saveToDatabase(fullName, email, phone, location, previewPic.src); // Use current image
+    }
+  });
+
+  function saveToDatabase(name, email, phone, location, imageUrl) {
+    const userId = 'user_' + Date.now(); // or use user UID if using auth
+
+    firebase.database().ref('profiles/' + userId).set({
+      name,
+      email,
+      phone,
+      location,
+      imageUrl
+    }).then(() => {
+      alert("✅ Profile saved to Firebase!");
+    }).catch(error => {
+      alert("❌ Error: " + error.message);
+    });
+  }
+</script></script>

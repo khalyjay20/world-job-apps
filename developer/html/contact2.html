@@ -1,0 +1,261 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact Us</title>
+  <link rel="stylesheet" href="contact.css">
+</head>
+<body>
+  <section class="contact-section">
+    <div class="contact-container">
+      <h2>Contact Us</h2>
+<form id="contactForm" class="contact-form">
+<form action="https://formsubmit.co/khalifajafar431@gmail.com" method="POST" class="contact-form">  <div class="input-group">
+    <span class="icon">🧑</span>
+    <input type="text" id="name" placeholder="Your Full Name" required />
+  </div>
+
+  <div class="input-group">
+    <span class="icon">✉️</span>
+    <input type="email" id="email" placeholder="Your Email" required />
+  </div>
+
+  <div class="input-group">
+    <span class="icon">💬</span>
+    <textarea id="message" placeholder="Your Message" rows="5" required></textarea>
+  </div>
+
+  <button type="submit">Send Message</button>
+</form>
+      <div class="contact-info">
+        <p>Email: khalifajafar431@gmail.com</p>
+        <p>Phone: +2349037850585</p>
+        <p>Location: Kano, Nigeria</p>
+    </div>
+<a href="https://wa.me/2349037850585?text=Hello%20Khalifa,%20I%20am%20interested%20in%20applying%20for%20a%20job." target="_blank" class="whatsapp-btn">Send via WhatsApp</a>
+  </section>
+
+  <!-- Move Home Button OUTSIDE -->
+  <div class="home-btn-container">
+    <a href="index (2).html" class="home-btn">🏠 Home</a>
+  </div>
+  </section>
+
+  <!-- Firebase CDN -->
+  <script type="module">
+    // Import Firebase modules
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    // 🔐 Your Firebase config here (paste from console)
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_PROJECT_ID.appspot.com",
+      messagingSenderId: "YOUR_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // Handle form submit
+    const form = document.getElementById('contactForm');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const message = document.getElementById('message').value;
+
+      try {
+        await addDoc(collection(db, "contactMessages"), {
+          name,
+          email,
+          message,
+          timestamp: new Date()
+        });
+
+        alert("✅ Message sent successfully!");
+        form.reset();
+      } catch (error) {
+        console.error("❌ Error sending message: ", error);
+        alert("❌ Failed to send message.");
+      }
+    });
+  </script>
+</body>
+</html><style>* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to right, #e3f2fd, #ffffff);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px;
+}
+
+.contact-section {
+  background: #ffffff;
+  padding: 30px 40px;
+  border-radius: 20px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 600px;
+}
+
+.contact-container {
+  text-align: center;
+}
+
+.contact-container h2 {
+  color: #0d47a1;
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 90%;
+  max-width: 480px;
+  height: 50px;
+  padding: 14px 16px;
+  margin: 12px 0;
+  border: 2px solid #cce7ff;
+  border-radius: 10px;
+  font-size: 1rem;
+  background-color: #f4faff;
+  transition: 0.3s;
+}
+
+.contact-form textarea {
+  height: 120px;
+  resize: none;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: #888;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: #1565c0;
+  background-color: #ffffff;
+  outline: none;
+}
+
+.contact-form button {
+  width: 90%;
+  max-width: 480px;
+  height: 50px;
+  background-color: #1565c0;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  margin-top: 16px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.contact-form button:hover {
+  background-color: #0d47a1;
+  transform: translateY(-2px);
+}
+
+.contact-info {
+  margin-top: 30px;
+  padding: 20px;
+  background: #eaf4ff;
+  border-left: 6px solid #1e88e5;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  color: #34495e;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  text-align: left;
+}
+
+.contact-info p {
+  margin-bottom: 8px;
+}
+
+.home-btn-container {
+  margin-top: 25px;
+  display: flex;
+  justify-content: center;
+}
+
+.home-btn {
+  text-decoration: none;
+  color: white;
+  background: #1e88e5;
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background 0.3s;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.home-btn:hover {
+  background: #1565c0;
+}
+.input-group {
+  display: flex;
+  align-items: center;
+  width: 90%;
+  max-width: 480px;
+  margin: 12px 0;
+  background-color: #f4faff;
+  border: 2px solid #cce7ff;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: 0.3s;
+}
+
+.input-group:focus-within {
+  border-color: #1565c0;
+  background-color: #ffffff;
+}
+
+.icon {
+  padding: 0 12px;
+  font-size: 1.2rem;
+  color: #1565c0;
+  background-color: #e3f2fd;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.input-group input,
+.input-group textarea {
+  flex: 1;
+  border: none;
+  padding: 14px 16px;
+  font-size: 1rem;
+  background: transparent;
+  outline: none;
+}
+
+.input-group textarea {
+  height: 120px;
+  resize: none;
+}</style>

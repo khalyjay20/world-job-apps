@@ -1,0 +1,200 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Job Application</title>
+  <style>
+    label {
+      font-size: 15px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    input,
+    select,
+    textarea:focus {
+      outline-color: rgb(62, 88, 172);
+    }
+
+    .button-container {
+      padding: 30px;
+      display: flex;
+      justify-content: end;
+    }
+
+    button {
+      background-color: rgb(80, 102, 200);
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      color: white;
+      font-size: 16px;
+      transition: 0.3s ease-in;
+    }
+
+    button:hover {
+      cursor: pointer;
+      background-color: #ccc;
+      border: 2px solid red;
+      color: rgb(14, 13, 13);
+    }
+
+    * {
+      margin: 0;
+      padding: 0%;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      background-color: #514e91;
+      background: url(IMG2.jpg)no-repeat;
+      background-size: 1500px;
+      padding: 10px;
+    }
+
+    .content {
+      max-width: 900px;
+      background-color: #fff;
+      margin: 50px auto;
+      border-radius: 20px;
+      box-shadow: 4px 3px 5px rgba(1, 1, 1, 0.1);
+      padding: 20px;
+    }
+
+    .content h1 {
+      padding-bottom: 20px;
+      font-size: 40px;
+      text-align: center;
+    }
+
+    .content span {
+      font-size: 24px;
+      color: blue;
+    }
+
+    .form-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .from-control {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .textarea-control {
+      grid-column: 1 / span 2;
+    }
+
+    .textarea-control textarea {
+      width: 100%;
+    }
+
+    @media (max-width: 600px) {
+      .textarea-control {
+        grid-column: 1 / span 1;
+      }
+
+      .button-container {
+        justify-content: center;
+      }
+
+      button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="content">
+    <h1>Job Application <span>(Web)</span></h1>
+    <form id="jobForm">
+      <div class="form-container">
+        <div class="from-control">
+          <label for="first-name">First Name</label>
+          <input id="first-name" name="first-name" placeholder="Enter first name" required>
+        </div>
+        <div class="from-control">
+          <label for="last-name">Last Name</label>
+          <input id="last-name" name="last-name" placeholder="Enter last name" required>
+        </div>
+        <div class="from-control">
+          <label for="email">E-mail</label>
+          <input type="email" id="email" name="email" placeholder="Enter E-mail" required>
+        </div>
+        <div class="from-control">
+          <label for="job-role">Job Role</label>
+          <select id="job-role" name="job-role" required>
+            <option value="">Select job role</option>
+            <option value="frontend">Front End Developer</option>
+            <option value="backend">Back End Developer</option>
+            <option value="fullstack">Full Stack Developer</option>
+            <option value="uiux">UI/UX Designer</option>
+            <option value="photographing">photographing</option>
+            <option value="content">Content Creator</option>
+            <option value="animator">Animator</option>
+            <option value="computer">Computer Programmer</option>
+            <option value="Application">Application Developer</option>
+          </select>
+        </div>
+        <div class="textarea-control">
+          <label for="address">Address</label>
+          <textarea id="address" name="address" rows="4" placeholder="Enter address" required></textarea>
+        </div>
+        <div class="from-control">
+          <label for="city">City</label>
+          <input id="city" name="city" placeholder="Enter city" required>
+        </div>
+        <div class="from-control">
+          <label for="pincode">Pincode</label>
+          <input type="number" id="pincode" name="pincode" placeholder="Enter pincode" required>
+        </div>
+        <div class="from-control">
+          <label for="date">Start Date</label>
+          <input type="date" id="date" name="date" required>
+        </div>
+        <div class="from-control">
+          <label for="cv">Upload Your CV</label>
+          <input type="file" id="cv" name="cv" required>
+        </div>
+      </div>
+
+      <div class="button-container">
+        <button type="submit">Apply Now</button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    // Job role to application link mapping
+    const jobLinks = {
+      frontend: "https://www.w3schools.com",
+      backend: "https://www.coursera.org/degrees",
+      fullstack: "https://www.udemy.com",
+      uiux: "https://monkrey.org/",
+      photographing: "https://hamaz-photographing.netlify.app/",
+      content: "https://www.heylink.me",
+      animator: "https://www.rebelway.net",
+      computer: "https://ng.linkedin.com",
+      Application: "https://www.myjobmag.com",
+    };
+
+    document.getElementById("jobForm").addEventListener("submit", function (e) {
+      e.preventDefault(); // Prevent form from refreshing page
+      const selectedRole = document.getElementById("job-role").value;
+      if (selectedRole && jobLinks[selectedRole]) {
+        window.location.href = jobLinks[selectedRole]; // Redirect to job application link
+      } else {
+        alert("Please select a job role.");
+      }
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width" initial-scale="1.0">
+    <title>Job Application</title>
+    <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<style>
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: system-ui;
+    list-style: none;
+}
+.hero{
+    min-height: 100vh;
+    background-color: rgba(73, 70, 70, 0.499);
+    background: url(photos.jpg)no-repeat;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+.hero nav{
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 60%;
+    padding: 10px 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+nav ul{
+    display: flex;
+    gap: 2rem;
+    padding: 10px 25px;
+    background-color: white;
+    border-radius: 1em;
+}
+nav ul a{
+    text-decoration: none;
+    font-size: 1em;
+    font-weight: bold;
+    color: black;
+}
+nav ul a:hover{
+    border-block-end: 2px solid black;
+}
+nav button{
+    padding: 8px 25px;
+    background-color: white;
+    color: black;
+    font-weight: bold;
+    border-radius: .8rem;
+    margin: 10px;
+    border: none;
+    cursor: pointer;
+}
+nav button:nth-child(2){
+    background-color: grey;
+    color: white;
+}
+nav button:hover{
+    box-shadow: inset 0 0 20px grey;
+}
+.content{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    text-align: center;
+}
+.content span{
+    font-size: 25px;
+    color: blue;
+}
+.content img{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 5px solid rgb(116, 110, 110);
+}
+.content h1{
+    font-size: 3rem;
+    color: rgb(6, 6, 6);
+}
+.content p{
+    font-size: 1rem;
+    font-weight: bold;
+    color: black;
+    background-color: rgba(225, 225, 225, 0.3);
+    backdrop-filter: blur(20px);
+    padding: 3px 5px;
+    border-radius: 3px;
+}
+aside{
+    max-width: 30px;
+    min-height: 100vh;
+    padding: 10px 5px;
+    background-color: rgba( 0, 0, 0, 0.2);
+    backdrop-filter: blur(5px);
+    position: fixed;
+    top: 3%;
+    left: 0;
+    box-shadow: -8px 0 16px rgba(124, 61, 61, 0.3);
+    border-radius: .5em;
+}
+aside h1{
+    background-color: rgba(225, 225, 225, 0.3);
+    padding: 14px 10px;
+    border-radius: .5em;
+    color: rgb(10, 10, 10);
+}
+aside li{
+    padding: 10px 20px;
+    border-block-start: 1px solid rgb(0, 0, 0);
+    border-block-end: 1px solid grey;
+    cursor: pointer;
+    transition: .5s;
+}
+aside li:hover{
+    padding: 12px 45px;
+}
+aside a{
+    color: rgb(0, 0, 0);
+    margin-left: 10px;
+    text-decoration: none;
+}
+aside a i{
+    margin-right: 30px;
+    font-size: 2rem;
+}
+/* WhatsApp Float */
+.whatsapp-float {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 30px;
+    right: 30px;
+    background-color: #25d366;
+    color: white;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.whatsapp-float:hover {
+    background-color: #128C7E;
+    transform: scale(1.1) rotate(10deg);
+}
+
+</style>
+<body>
+    
+    <section class="hero">
+        <nav>
+            <ul>
+                <li><a href="home3.html">home</a></li>
+                <li><a href="about us 2.html">about us</a></li>
+                <li><a href="service.html">service</a></li>
+                <li><a href="help.html">help</a></li>
+            </ul>
+            <div class="btn">
+                <button><a href="index3.html">sign in</a></button>
+                <button id="signoutbtn">sign out</button>
+            </div>
+        </nav>
+        <div class="content">
+            <img src="photos2.jpg" alt="logo">
+            <h1>Job Application<span>(Web)</span></h1>
+            <p>lets explore the world of job development together....</p>
+       </div>
+    <aside>
+        <h1>Job Academy</h1>
+        <ul>
+        <li><a href="dashboard .html"><i class="bx bxs-dashboard"></i>Dashboard</a></li>
+        <li><a href="contact2.html"><i class="bx bxs-contact"></i>contact</a></li>
+        <li><a href="#"><i class='bx bx-bell'></i>notification</a></li> 
+        <li><a href="https://www.facebook.com/share/19cdBryR33/"><i class='bx bxl-facebook'></i>facebook</a></li>
+        <li><a href="https://youtube.com/@ahmadhamza123?si=W5GGABIY3hKNgw0z"><i class='bx bxl-youtube'></i>youtube</a></li>
+        <li><a href="https://www.instagram.com/_hamazjr?igsh=MXQ5ZnRucGUzMXI5MA=="><i class='bx bxl-instagram'></i>instagram</a></li>
+        </ul>
+    </aside>
+        <a href="https://wa.me/2349037850585" class="whatsapp-float" target="_blank" aria-label="WhatsApp Chat"></a>        
+        <i class="fab fa-whatsapp"></i>
+</section>
+
+</body>
+</html>
